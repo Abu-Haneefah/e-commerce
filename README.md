@@ -1,36 +1,63 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<!-- Banner / Header -->
+<h1 align="center">🛒 E-Commerce Storefront</h1>
+<h3 align="center">Next.js powered shopping experience with a clean, responsive UI</h3>
 
-## Getting Started
+<p align="center">
+  <img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="400"/>
+</p>
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🧩 Project Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This project is a **modern e-commerce web app** that brings together design and functionality.  
+It’s built to demonstrate how a storefront should look and feel: **fast, intuitive, and visually appealing**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Whether it’s **browsing products, adding items to a cart, or simulating checkout**, everything is crafted to showcase best practices in frontend development.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+🔗 **Live Demo:** [E-Commerce Storefront](https://e-commerce-4aecd45wt-abu-haneefah-s-projects.vercel.app/)
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🔥 Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 🛍 **Browse Products** — neat grid layout with images, titles, and prices.
+- 📖 **Product Details** — get more info, select options, and add to cart.
+- 🛒 **Shopping Cart** — view your items, adjust quantities, and remove products.
+- 💳 **Checkout UI** — clean forms for address and payment (frontend only).
+- 📱 **Mobile-First Design** — responsive across phones, tablets, and desktops.
+- 🧩 **Reusable Components** — flexible structure for future integrations.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠️ Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=js,ts,react,next,tailwind,git,github,vscode" />
+</p>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Framework:** Next.js (React)
+- **Styling:** Tailwind CSS
+- **State Management:** React state & context (or your chosen approach)
+- **Validation & Forms:** (React Hook Form / Zod if included)
+- **Deployment:** Vercel
+
+---
+
+## 📸 Preview
+
+<p align="center">
+  <img src="/e-commerce/Images/e-commerce1.PNG" alt="Product Listing" />
+  <br/>
+  <img src="/e-commerce/Images/e-commerce2.PNG" alt="Product Detail" />
+</p>
+
+---
+
+## ⚙️ Getting Started
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/your-username/e-commerce-frontend.git
+   cd e-commerce-frontend
+   ```
