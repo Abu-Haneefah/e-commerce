@@ -2,10 +2,6 @@
 <h1 align="center">🛒 E-Commerce Storefront</h1>
 <h3 align="center">Next.js powered shopping experience with a clean, responsive UI</h3>
 
-<p align="center">
-  <img src="https://media.giphy.com/media/du3J3cXyzhj75IOgvA/giphy.gif" width="400"/>
-</p>
-
 ---
 
 ## 🧩 Project Overview
@@ -47,9 +43,9 @@ Whether it’s **browsing products, adding items to a cart, or simulating checko
 ## 📸 Preview
 
 <p align="center">
-  <img src="/e-commerce/Images/e-commerce1.PNG" alt="Product Listing" />
+  <img src="./Images/e-commerce1.PNG" alt="Product Listing" />
   <br/>
-  <img src="/e-commerce/Images/e-commerce2.PNG" alt="Product Detail" />
+  <img src="./Images/e-commerce2.PNG" alt="Product Detail" />
 </p>
 
 ---
