@@ -1,10 +1,40 @@
 import Image from "next/image";
 
 const Reviews = async ({ productId }: { productId: string }) => {
-  const reviewRes = await fetch(
-    `https://api.fera.ai/v3/public/reviews?product.id=${productId}&public_key=${process.env.NEXT_PUBLIC_FERA_ID}`
-  );
-  const reviews = await reviewRes.json();
+  // MOCK THE REVIEW DATA
+  const reviews = {
+    data: [
+      {
+        id: "review1",
+        rating: 5,
+        customer: {
+          avatar_url:
+            "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          display_name: "Mock Customer 1",
+        },
+        heading: "Great Product!",
+        body: "I love this product, it's exactly what I needed. Highly recommend it to everyone.",
+        media: [
+          {
+            id: "media1",
+            url: "https://images.pexels.com/photos/1039958/pexels-photo-1039958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          },
+        ],
+      },
+      {
+        id: "review2",
+        rating: 4,
+        customer: {
+          avatar_url:
+            "https://images.pexels.com/photos/1040881/pexels-photo-1040881.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          display_name: "Mock Customer 2",
+        },
+        heading: "Good but could be better",
+        body: "The quality is good, but the color was slightly different than expected.",
+        media: [],
+      },
+    ],
+  };
 
   return reviews.data.map((review: any) => (
     <div className="flex flex-col gap-4" key={review.id}>

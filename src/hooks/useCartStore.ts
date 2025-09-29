@@ -1,68 +1,87 @@
 import { create } from "zustand";
-import { currentCart } from "@wix/ecom";
-import { WixClient } from "@/context/wixContext";
 
 type CartState = {
-  cart: currentCart.Cart;
+  cart: {
+    lineItems: any[];
+    subtotal: { amount: string };
+  };
   isLoading: boolean;
   counter: number;
-  getCart: (wixClient: WixClient) => void;
-  addItem: (
-    wixClient: WixClient,
-    productId: string,
-    variantId: string,
-    quantity: number
-  ) => void;
-  removeItem: (wixClient: WixClient, itemId: string) => void;
+  getCart: () => void;
+  addItem: (productId: string, variantId: string, quantity: number) => void;
+  removeItem: (itemId: string) => void;
 };
 
 export const useCartStore = create<CartState>((set) => ({
-  cart: [],
-  isLoading: true,
+  cart: {
+    lineItems: [],
+    subtotal: { amount: "0.00" },
+  },
+  isLoading: false,
   counter: 0,
-  getCart: async (wixClient) => {
-    try {
-      const cart = await wixClient.currentCart.getCurrentCart();
-      set({
-        cart: cart || [],
-        isLoading: false,
-        counter: cart?.lineItems.length || 0,
+
+  getCart: () => {
+    // Mock getCart function
+    set({
+      cart: { lineItems: [], subtotal: { amount: "0.00" } },
+      isLoading: false,
+      counter: 0,
+    });
+  },
+
+  addItem: async (productId, variantId, quantity) => {
+    set((state) => ({ ...state, isLoading: true }));
+
+    // Simulate API call delay
+    setTimeout(() => {
+      set((state) => {
+        const newCart = { ...state.cart };
+        const existingItem = newCart.lineItems.find(
+          (item) => item.catalogReference.catalogItemId === productId
+        );
+
+        // If item already exists, update its quantity, else add new item
+        if (existingItem) {
+          existingItem.quantity += quantity;
+        } else {
+          newCart.lineItems.push({
+            _id: Math.random().toString(),
+            quantity: quantity,
+            catalogReference: {
+              catalogItemId: productId,
+              options: { variantId },
+            },
+          });
+        }
+
+        const newCounter = newCart.lineItems.length;
+        return {
+          cart: newCart,
+          counter: newCounter,
+          isLoading: false,
+        };
       });
-    } catch (err) {
-      set((prev) => ({ ...prev, isLoading: false }));
-    }
+    }, 500);
   },
-  addItem: async (wixClient, productId, variantId, quantity) => {
-    set((state) => ({ ...state, isLoading: true }));
-    const response = await wixClient.currentCart.addToCurrentCart({
-      lineItems: [
-        {
-          catalogReference: {
-            appId: process.env.NEXT_PUBLIC_WIX_APP_ID!,
-            catalogItemId: productId,
-            ...(variantId && { options: { variantId } }),
-          },
-          quantity: quantity,
-        },
-      ],
-    });
 
-    set({
-      cart: response.cart,
-      counter: response.cart?.lineItems.length,
-      isLoading: false,
-    });
-  },
-  removeItem: async (wixClient, itemId) => {
+  removeItem: async (itemId) => {
     set((state) => ({ ...state, isLoading: true }));
-    const response = await wixClient.currentCart.removeLineItemsFromCurrentCart(
-      [itemId]
-    );
 
-    set({
-      cart: response.cart,
-      counter: response.cart?.lineItems.length,
-      isLoading: false,
-    });
+    // Simulate API call delay
+    setTimeout(() => {
+      set((state) => {
+        const newCart = { ...state.cart };
+        newCart.lineItems = newCart.lineItems.filter(
+          (item) => item._id !== itemId
+        );
+        const newCounter = newCart.lineItems.length;
+
+        return {
+          cart: newCart,
+          counter: newCounter,
+          isLoading: false,
+        };
+      });
+    }, 500);
   },
 }));

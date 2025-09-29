@@ -1,32 +1,13 @@
-"use server";
+export const updateUser = async (formData: { get: (arg0: string) => any }) => {
+  // MOCK THE API CALL
+  console.log("Mocking a user update with the following data:");
+  console.log("ID:", formData.get("id"));
+  console.log("Username:", formData.get("username"));
+  console.log("First Name:", formData.get("firstName"));
+  console.log("Last Name:", formData.get("lastName"));
+  console.log("Email:", formData.get("email"));
+  console.log("Phone:", formData.get("phone"));
 
-import { wixClientServer } from "./wixClientServer";
-
-export const updateUser = async (formData: FormData) => {
-  const wixClient = await wixClientServer();
-
-  const id = formData.get("id") as string;
-  const username = formData.get("username") as string;
-  const firstName = formData.get("firstName") as string;
-  const lastName = formData.get("lastName") as string;
-  const email = formData.get("email") as string;
-  const phone = formData.get("phone") as string;
-
-  console.log(username)
-
-  try {
-    const response = await wixClient.members.updateMember(id, {
-      contact: {
-        firstName: firstName || undefined,
-        lastName: lastName || undefined,
-        phones: [phone] || undefined,
-      },
-      loginEmail: email || undefined,
-      profile: { nickname: username || undefined },
-    });
-
-    console.log(response)
-  } catch (err) {
-    console.log(err);
-  }
+  // You can also add a mock success message
+  return { success: true, message: "User data updated successfully (mock)." };
 };

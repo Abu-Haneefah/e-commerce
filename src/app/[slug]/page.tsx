@@ -2,23 +2,48 @@ import Add from "@/components/Add";
 import CustomizeProducts from "@/components/CustomizeProducts";
 import ProductImages from "@/components/ProductImages";
 import Reviews from "@/components/Reviews";
-import { wixClientServer } from "@/lib/wixClientServer";
-import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
-const SinglePage = async ({ params }: { params: { slug: string } }) => {
-  const wixClient = await wixClientServer();
-
-  const products = await wixClient.products
-    .queryProducts()
-    .eq("slug", params.slug)
-    .find();
-
-  if (!products.items[0]) {
-    return notFound();
-  }
-
-  const product = products.items[0];
+const SinglePage = () => {
+  // MOCK THE PRODUCT DATA
+  const product = {
+    _id: "e5012574-d4dd-4fcf-84de-c84024479998",
+    name: "Mock Product",
+    description:
+      "This is a mocked product description to demonstrate the component without a backend. It includes a variety of details like materials, fit, and care instructions to show how the component renders.",
+    price: {
+      price: 50.0,
+      discountedPrice: 40.0,
+    },
+    media: {
+      items: [
+        {
+          image: {
+            url: "https://images.pexels.com/photos/1037997/pexels-photo-1037997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          },
+        },
+        {
+          image: {
+            url: "https://images.pexels.com/photos/2083163/pexels-photo-2083163.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          },
+        },
+      ],
+    },
+    variants: [],
+    productOptions: [],
+    stock: { quantity: 10 },
+    additionalInfoSections: [
+      {
+        title: "Product Details",
+        description: "Made from 100% organic cotton. Machine washable.",
+      },
+      {
+        title: "Shipping & Returns",
+        description:
+          "Free shipping on orders over $50. Returns accepted within 30 days.",
+      },
+    ],
+  };
 
   return (
     <div className="px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64 relative flex flex-col lg:flex-row gap-16">
@@ -58,7 +83,7 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
           />
         )}
         <div className="h-[2px] bg-gray-100" />
-        {product.additionalInfoSections?.map((section: any) => (
+        {product.additionalInfoSections?.map((section) => (
           <div className="text-sm" key={section.title}>
             <h4 className="font-medium mb-4">{section.title}</h4>
             <p>{section.description}</p>
@@ -68,6 +93,8 @@ const SinglePage = async ({ params }: { params: { slug: string } }) => {
         {/* REVIEWS */}
         <h1 className="text-2xl">User Reviews</h1>
         <Suspense fallback="Loading...">
+          {/* Since we don't have a backend, the Reviews component will likely not work. 
+              You may need to mock it as well if it's a server component. */}
           <Reviews productId={product._id!} />
         </Suspense>
       </div>
